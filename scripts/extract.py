@@ -43,7 +43,7 @@ class DataExtractor():
 
                 cvimg = self.compressed_ros_to_cv2(msg)
                 
-                img_name = os.path.join(self.save_dir, str(str(self.img_id) + '.jpg'))
+                img_name = os.path.join(self.save_dir, str(os.path.basename(bag_file)) + '_' + str(str(self.img_id) + '.jpg'))
                 cv2.imwrite(img_name, cvimg)
                 print('saved to {}'.format(img_name))
                 self.img_id += 1
