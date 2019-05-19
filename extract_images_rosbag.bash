@@ -2,17 +2,23 @@
 
 # Parameters for extracting images from ROSBAG.
 # SAVE_DIR is directory is store extracted images
-# BAG_DIR is location of rosbag. 
+# BAG_DIR is location of rosbag(s). 
 # START,END,INTERVAL is ROSBAG sampling info 
 # TOPICS is rostopics that you want to extract images from
 
 SAVE_DIR='jiangshi' 
-BAG_DIR='/media/hashir/OS/Users/hashi/Desktop/Bumblebee/rosbags/queenstown-jiangshi-normal_2019-05-09-22-13-42.bag'
+BAG_DIR='/media/hashir/OS/Users/hashi/Desktop/Bumblebee/rosbags/queenstown-jiangshi-normal_2019-05-09-22-13-42.bag /media/hashir/OS/Users/hashi/Desktop/Bumblebee/rosbags/queenstown-garlic-sunny_2019-05-15-19-38-46.bag'
 START=0
-END=240
-INTERVAL=1
+END=24
+INTERVAL=0.1
 # TOPICS='/auv/bot_cam/image_color/compressed /auv/front_cam/image_color/compressed'
 TOPICS='/auv/front_cam/image_color/compressed'
+
+
+
+
+
+
 
 if [ -z "$BAG_DIR" ]; then
     echo "empty BAG_DIR, please set it to proceed.";
@@ -43,8 +49,8 @@ fi;
 
 # if TOPICS not entered, will rely on defaults provided in extract.py
 if [ -z "$TOPICS" ]; then
-	python scripts/extract.py --save-dir=$IMAGES_DIR --bag=$BAG_DIR --start=$START --end=$END --interval=$INTERVAL ;
+	python scripts/extract.py --save-dir=$IMAGES_DIR --bag $BAG_DIR --start=$START --end=$END --interval=$INTERVAL ;
 else
-    python scripts/extract.py --save-dir=$IMAGES_DIR --bag=$BAG_DIR --start=$START --end=$END --interval=$INTERVAL --topics $TOPICS ;
+    python scripts/extract.py --save-dir=$IMAGES_DIR --bag $BAG_DIR --start=$START --end=$END --interval=$INTERVAL --topics $TOPICS ;
 fi;
 

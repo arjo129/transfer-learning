@@ -22,24 +22,25 @@ class DataExtractor():
         head = True
         with rosbag.Bag(bag_file, 'r') as bag:
             for topic, msg, t in bag.read_messages(desired_topic):
+                secs = t.to_sec()
+                
                 if head:
-                    start += t.secs
-                    end += t.secs
+                    start += secs
+                    end += secs
                     head = False
 
-                if t.secs < start:
+                if secs < start:
                     continue
 
-                if t.secs > end:
+                if secs > end:
                     break
              
 
                 # save images some intervals apart
-                if prev is not None and t.secs - prev < interval:
-                    #print prev, t.secs
+                if prev is not None and secs - prev < interval:
                     continue
                 else:
-                    prev = t.secs
+                    prev = secs
 
                 cvimg = self.compressed_ros_to_cv2(msg)
                 
@@ -60,14 +61,15 @@ class DataExtractor():
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('--save-dir', dest='save_dir', type=str, required=True, help='directory to save extracted images')
-    p.add_argument('--bag', '-b', dest='bag', type=str, required=True, help='directory where bag is stored')   
+    p.add_argument('--bags', '-b', dest='bags', type=str, nargs='*', help='directory where each bag is stored, separated by spaces')   
     p.add_argument('--start', '-s', dest='start', type=int, default=0, help='rosbag start time')
     p.add_argument('--end', '-e', dest='end', type=int, default=240, help='rosbag end time')
-    p.add_argument('--interval', '-i', dest='interval', type=int, default=1, help='rosbag interval to sample')
+    p.add_argument('--interval', '-i', dest='interval', type=float, default=1, help='rosbag interval to sample')
     p.add_argument('--topics', '-t', dest='topics', type=str, nargs='+', default=['/auv/bot_cam/image_color/compressed'])
 
     args = p.parse_args()
 
-    extractor = DataExtractor(args.save_dir)
-    for topic in args.topics:
-        extractor.extract(args.bag, topic, args.start, args.end, args.interval, 'train')
+    for bag in args.bags:
+        extractor = DataExtractor(args.save_dir)
+        for topic in args.topics:
+            extractor.extract(bag, topic, args.start, args.end, args.interval, 'train')
