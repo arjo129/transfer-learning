@@ -61,16 +61,16 @@ class xmlVocAnnotations
 		$database = $this->_domDoc->createElement('database',$this->_databaseSrc);
 		$sourceNode->appendChild($database);			
         
-		$size_part = $this->_domDoc->createElement('size_part');
-		$size_partNode = $topNode->appendChild($size_part);	
+		$size = $this->_domDoc->createElement('size');
+		$sizeNode = $topNode->appendChild($size);	
 				
         $width  = $this->_domDoc->createElement('width',  strval($this->_imgSize['width']));
 		$height = $this->_domDoc->createElement('height', strval($this->_imgSize['height']));
         $depth  = $this->_domDoc->createElement('depth',  strval($this->_imgSize['depth']));
         
-		$size_partNode->appendChild($width);
-		$size_partNode->appendChild($height);
-		$size_partNode->appendChild($depth);
+		$sizeNode->appendChild($width);
+		$sizeNode->appendChild($height);
+		$sizeNode->appendChild($depth);
 
 		$segmented = $this->_domDoc->createElement("segmented","0");
 		$topNode->appendChild($segmented);        		

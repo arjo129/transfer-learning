@@ -1,9 +1,9 @@
 INFO - getNewImage.php
-Random index = 63
+Random index = 43
 Annotated 20%
-xml_filepath ../data/jiangshi/annotations/queenstown-jiangshi-normal_2019-05-09-22-13-42.bag_1.xml
+xml_filepath ../data/jiangshi/annotations/queenstown-jiangshi-normal_2019-05-09-22-13-42.bag_4.xml
 Parse XML
-Annotations a:1:{i:0;a:5:{s:1:"x";s:15:"826.79344671704";s:1:"y";s:14:"446.6678411257";s:5:"width";d:122.59313207094999;s:6:"height";d:199.51454715324002;s:3:"tag";s:8:"Jiangshi";}}
-Annotations a:1:{i:0;a:5:{s:1:"x";s:15:"826.79344671704";s:1:"y";s:14:"446.6678411257";s:5:"width";d:122.59313207094999;s:6:"height";d:199.51454715324002;s:3:"tag";s:8:"Jiangshi";}}
-URL image = data//jiangshi/images/queenstown-jiangshi-normal_2019-05-09-22-13-42.bag_1.jpg
-Annotations a:4:{s:3:"url";s:78:"data//jiangshi/images/queenstown-jiangshi-normal_2019-05-09-22-13-42.bag_1.jpg";s:2:"id";s:56:"queenstown-jiangshi-normal_2019-05-09-22-13-42.bag_1.jpg";s:6:"folder";s:15:"jiangshi/images";s:11:"annotations";a:1:{i:0;a:5:{s:1:"x";s:15:"826.79344671704";s:1:"y";s:14:"446.6678411257";s:5:"width";d:122.59313207094999;s:6:"height";d:199.51454715324002;s:3:"tag";s:8:"Jiangshi";}}}
+Annotations a:1:{i:0;a:5:{s:1:"x";s:15:"846.06743472107";s:1:"y";s:15:"435.87534320295";s:5:"width";d:129.81119651579002;s:6:"height";d:187.50616203381998;s:3:"tag";s:8:"jiangshi";}}
+Annotations a:1:{i:0;a:5:{s:1:"x";s:15:"846.06743472107";s:1:"y";s:15:"435.87534320295";s:5:"width";d:129.81119651579002;s:6:"height";d:187.50616203381998;s:3:"tag";s:8:"jiangshi";}}
+URL image = data//jiangshi/images/queenstown-jiangshi-normal_2019-05-09-22-13-42.bag_4.jpg
+Annotations a:4:{s:3:"url";s:78:"data//jiangshi/images/queenstown-jiangshi-normal_2019-05-09-22-13-42.bag_4.jpg";s:2:"id";s:56:"queenstown-jiangshi-normal_2019-05-09-22-13-42.bag_4.jpg";s:6:"folder";s:15:"jiangshi/images";s:11:"annotations";a:1:{i:0;a:5:{s:1:"x";s:15:"846.06743472107";s:1:"y";s:15:"435.87534320295";s:5:"width";d:129.81119651579002;s:6:"height";d:187.50616203381998;s:3:"tag";s:8:"jiangshi";}}}
