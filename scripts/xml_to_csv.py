@@ -14,10 +14,10 @@ def xml_to_csv(path):
                      int(root.find('size')[0].text),
                      int(root.find('size')[1].text),
                      member[0].text,
-                     int(member[4][0].text),
-                     int(member[4][1].text),
-                     int(member[4][2].text),
-                     int(member[4][3].text)
+                     int(float(member[4][0].text)),
+                     int(float(member[4][1].text)),
+                     int(float(member[4][2].text)),
+                     int(float(member[4][3].text))
                      )
             xml_list.append(value)
     column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
@@ -35,12 +35,13 @@ def main():
         image_path = args.path
     else:
         image_path = os.path.join(os.getcwd(), args.path)
-
+    
+    print("Traversing {}".format(image_path))
     xml_df = xml_to_csv(image_path)
     parent_dir = os.path.dirname(os.path.dirname(image_path))
     labels_path = os.path.join(parent_dir, 'labels.csv')
     xml_df.to_csv(labels_path, index=None)
-    print('Successfully converted xml to csv.')
+    print('Successfully converted xml to csv. Saved at {}'.format(labels_path))
 
 
 main()

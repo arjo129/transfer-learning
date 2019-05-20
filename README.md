@@ -30,13 +30,11 @@ and 'output_model' directories will be created to facillitate later development 
 
 4. Save xml annotations to the annotations folder.
 
-5. Run 'python scripts/xml_to_csv.py [ANNOTATIONS_PATH] 'to create csv label
-
 <h3>How to label/annotate images on LAN</h3>
 
 1. Install dependencies. sudo apt-get install php php-dom
 
-2. Add the images to annotate folder to web_annotation/data
+2. Add the images to annotate folder to web_annotation/data/[YOUR_FOLDER_NAME]. eg: web_annotations/data/jiangshi
 
 3. Edit configuration file found in web_annotation_tool/inc/configuration.php and the label classes in web_annotation_tool/resources/list_of_tags.json
 
@@ -44,7 +42,11 @@ and 'output_model' directories will be created to facillitate later development 
 
 5. Connect to the webpage via http://[HOST_IP]:8000, where [HOST_IP] is the IP address of the server hosting the webpage
 
-6. Draw a rectangle over the image and select one of the labels that matches the picture. 
+6. Draw a rectangle over the image and select one of the labels that matches the picture. Annotations saved in annotations folder. 
+
+<h3>How to convert from Pascal VOC xml files to a single CSV format (required for tensorflow)</h3>
+
+1. Run `python scripts/xml_to_csv.py [ANNOTATIONS_PATH] ` to create csv label
 
 <h3>How to split train/test set</h3>
 
