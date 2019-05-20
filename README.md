@@ -20,7 +20,8 @@ Either pip3 install labelImg or build labelImg from source (recommended). To bui
 open extract_images_rosbag.bash and edit the 5 variables (or run python scripts/extract.py and enter arguments in command line). 'images', 'annotations'
 and 'output_model' directories will be created to facillitate later development work.
 
-<h3>How to label/annotate images</h3>
+<h3>How to label/annotate images offline</h3>
+
 1. source venv3/bin/activate (py3 has pyqt5 dependency for labelimg)
 
 2. edit predefined_classes.txt. run python labelImg/labelImg.py [IMAGE_PATH] predefined_classes.txt
@@ -31,7 +32,22 @@ and 'output_model' directories will be created to facillitate later development 
 
 5. Run 'python scripts/xml_to_csv.py [ANNOTATIONS_PATH] 'to create csv label
 
+<h3>How to label/annotate images on LAN</h3>
+
+1. Install dependencies. sudo apt-get install php php-dom
+
+2. Add the images to annotate folder to web_annotation/data
+
+3. Edit configuration file found in web_annotation_tool/inc/configuration.php and the label classes in web_annotation_tool/resources/list_of_tags.json
+
+4. Run the webserver (in web_annotation_tools directory). `php -S 0.0.0.0:8000`
+
+5. Connect to the webpage via http://[HOST_IP]:8000, where [HOST_IP] is the IP address of the server hosting the webpage
+
+6. Draw a rectangle over the image and select one of the labels that matches the picture. 
+
 <h3>How to split train/test set</h3>
+
 1. Run jupyter notebook. navigate and open split_labels.ipynb. currently 80% train 20% test split.
 
 2. export object_detection PYTHON_PATH slim
@@ -45,6 +61,7 @@ and 'output_model' directories will be created to facillitate later development 
   python generate_tfrecord.py --csv_input=test_labels.csv --image_dir=images --output_path=test.record
 
 <h3> How to retrain last few layers of object detection model </h3>
+
 1. create a label_map.pbtxt. item{
 				    id:1
 				    name: bat}
