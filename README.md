@@ -4,6 +4,7 @@ credit:
 - https://medium.com/coinmonks/part-1-2-step-by-step-guide-to-data-preparation-for-transfer-learning-using-tensorflows-object-ac45a6035b7a
 - https://github.com/chewwt/shiny-octo-umbrella
 - https://github.com/tzutalin/labelImg
+- https://github.com/frederictost/images_annotation_programme
 
 <h3>Requirements</h3>
 Tensorflow, object-detection, labelImg, jupyter notebook.
@@ -22,7 +23,7 @@ and 'output_model' directories will be created to facillitate later development 
 
 <h3>How to label/annotate images offline</h3>
 
-1. source venv3/bin/activate (py3 has pyqt5 dependency for labelimg)
+1. Start your python3 virtualenv with pyqt5. `source venv3/bin/activate` (py3 has pyqt5 dependency for labelimg)
 
 2. edit predefined_classes.txt. run python labelImg/labelImg.py [IMAGE_PATH] predefined_classes.txt
 
@@ -31,6 +32,8 @@ and 'output_model' directories will be created to facillitate later development 
 4. Save xml annotations to the annotations folder.
 
 <h3>How to label/annotate images on LAN</h3>
+
+![alt text](https://raw.githubusercontent.com/HashirZahir/transfer-learning/master/web_annotation_tool_demo.png)
 
 1. Install dependencies. sudo apt-get install php php-dom
 
@@ -76,12 +79,12 @@ and 'output_model' directories will be created to facillitate later development 
     
     2.3 edit num_examples to be number of objects in test.record
 
-3. run object_detection/model_main.py. python object_detection/model_main.py     --pipeline_config_path=/home/hashir/Desktop/bbauv/ml_models/ssdlite_mobilenet_v2_coco_2018_05_09/pipeline.config     --model_dir=/home/hashir/Desktop/bbauv/ml_models/ml_training/bat_wolf     --num_train_steps=50000     --sample_1_of_n_eval_examples=1
+3. run object_detection/model_main.py. `python object_detection/model_main.py     --pipeline_config_path=ssdlite_mobilenet_v2_coco_2018_05_09/pipeline.config     --model_dir=[OUTPUT_DIR]     --num_train_steps=50000     --sample_1_of_n_eval_examples=1`
 
-4. you can open another terminal to monitor progress on tensorboard. tensorboard --logdir=/home/hashir/Desktop/bbauv/ml_models/ml_training/bat_wolf
+4. you can open another terminal to monitor progress on tensorboard. `tensorboard --logdir=[OUTPUT_DIR]`
 
 5. export the model you have just trained. choose one of the checkpoints generated
-    python object_detection/export_inference_graph.py     --input_type=image_tensor     --pipeline_config_path=/home/hashir/Desktop/bbauv/ml_models/ssdlite_mobilenet_v2_coco_2018_05_09/pipeline.config     --trained_checkpoint_prefix=/home/hashir/Desktop/bbauv/ml_models/ml_training/bat_wolf/model.ckpt-472    --output_directory=/home/hashir/Desktop/bbauv/ml_models/ml_training/bat_wolf/output_model/
+    `python object_detection/export_inference_graph.py     --input_type=image_tensor     --pipeline_config_path=ssdlite_mobilenet_v2_coco_2018_05_09/pipeline.config     --trained_checkpoint_prefix=bat_wolf/model.ckpt-472    --output_directory=bat_wolf/output_model/`
 
 6. Test if the model is accurate on the test images. run jupyter notebook on object_detection/object_detection_tutorial.ipynb. change the necessary variables (model, images) to get it working.
 
