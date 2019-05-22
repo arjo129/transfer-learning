@@ -9,22 +9,30 @@ $service_requested = $_GET["info"];
 function getXmlFile($dir, $filename)
 {
 	$xml_filepath = null;
-    $files = scandir($dir);
+    #$files = scandir($dir);
     $results = null;	
-		
-    foreach($files as $key => $value)
-	{									
-        if ( strcasecmp($value, $filename) == 0 ) 
-		{
-            $xml_filepath = $dir.DIRECTORY_SEPARATOR.$filename;
-			return $xml_filepath;
-		}
-    }
+										
+	if ( file_exists($dir.DIRECTORY_SEPARATOR.$filename) ) 
+	{
+		$xml_filepath = $dir.DIRECTORY_SEPARATOR.$filename;
+		return $xml_filepath;
+	}
+
 
     return $xml_filepath;
 }
 
-$it = new RecursiveDirectoryIterator($IMAGE_ROOT_DIR);
+#get images in text file
+function getImages($dir) {
+	$fp = fopen('file_list.txt', 'r');
+	$lst = [];
+	while(! feof($fp))  {
+		array_push($lst, $dir.DIRECTORY_SEPARATOR.fgets($fp));
+	}
+	return $lst;
+}
+
+#$it = new RecursiveDirectoryIterator($IMAGE_ROOT_DIR);
 
 # List of images to process
 $list_of_images = array();
@@ -36,12 +44,13 @@ $image_index = 0;
 $annotated_image_index = 0;
 $not_annotated_image_index = 0;
 
-#$file = 'file.log';
-#file_put_contents($file, "INFO - Start the loop\n");
-	
-foreach(new RecursiveIteratorIterator($it) as $file) 
+#$log = 'file.log';
+#file_put_contents($log, "INFO - Start the loop\n");
+$images = getImages($IMAGE_ROOT_DIR);
+foreach($images as $file) 
 {	
-
+	#echo $file;
+	#file_put_contents($log, $file);
 	# Process file
 	if ( (strpos(strtoupper($file), '.JPG') !== false) && (strstr($file, $COLLECTION_NAME)) )
 	{

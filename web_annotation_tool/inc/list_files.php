@@ -6,4 +6,4 @@ for($i = 0; $i < count($files); ++$i){
     echo "". $files[$i] . "\n";
     fwrite($fp, $files[$i] . "\n");
 }
-fclose($fp)
+fclose($fp);
