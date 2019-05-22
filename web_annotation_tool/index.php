@@ -327,6 +327,9 @@ $(document).ready(function ()
 		// Sets a random selection
 			validateTagsAndRegions();
 		});
+
+
+	$('#all_annotations_button').trigger("click");
 		
 	$('#all_annotations_button').click(function(e) {
 	        // Show all annotations
