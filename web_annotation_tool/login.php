@@ -16,7 +16,7 @@
 <html>
 <h1>Image Tagging Framework</h1>
 <form method="post">
-	<input type="text" name="user"/>
-	<input type="password" name="password"/>
+	Username: <input type="text" name="user"/><br/>
+	Password: <input type="password" name="password"/>
 </form>
 </html>
