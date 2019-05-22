@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="autocomplete/easy-autocomplete.css" type="text/css" />
 	<link rel="stylesheet" href="autocomplete/easy-autocomplete.themes.css" type="text/css" />
 	<link rel="stylesheet" href="google_fonts/google_fonts_quicksand.css" type="text/css" />
-   	<link rel="stylesheet" href="google_fonts/google_fonts_raleway.css" type="text/css" />
+  <link rel="stylesheet" href="google_fonts/google_fonts_raleway.css" type="text/css" />
 	<link href="css/jquery.selectareas.css" rel="stylesheet">
 
 	<script src="js/jquery-3.2.1.js" type="text/javascript"></script>	
