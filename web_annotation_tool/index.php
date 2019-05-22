@@ -42,6 +42,8 @@ var changeStatusMessage = false;
 var json_annotations = [];
 var list_of_tags = [];
 var current_visible_area_id = -1;
+var min_bbox_dim = 10;
+var default_bbox_dim = 80;
 
 /*$("#image_to_process").on('load', function() {
  alert("On Load");
@@ -280,14 +282,14 @@ $(document).ready(function ()
 			newWidth = area.width;
 			newHeight = area.height;
 
-			if (newWidth < 80)
+			if (newWidth < default_bbox_dim)
 			{
-				newWidth = 80;
+				newWidth = default_bbox_dim;
 			}
 
-			if (newHeight < 80)
+			if (newHeight < default_bbox_dim)
 			{
-				newHeight = 80;
+				newHeight = default_bbox_dim;
 			}
 
 			$('#image_to_process').selectAreas('resizeArea', current_area.id, newWidth, newHeight);
@@ -327,7 +329,10 @@ $(document).ready(function ()
 		// Sets a random selection
 			validateTagsAndRegions();
 		});
-		
+
+
+	$('#all_annotations_button').trigger("click");
+
 	$('#all_annotations_button').click(function(e) {
 	        // Show all annotations
 			current_visible_area_id = -1;
@@ -517,14 +522,14 @@ function isTagInAuthorizedList()
 			newWidth = area.width;
 			newHeight = area.height;
 
-			if (newWidth < 80)
+			if (newWidth < default_bbox_dim)
 			{
-				newWidth = 80;
+				newWidth = default_bbox_dim;
 			}
 
-			if (newHeight < 80)
+			if (newHeight < default_bbox_dim)
 			{
-				newHeight = 80;
+				newHeight = default_bbox_dim;
 			}
 
 			$('#image_to_process').selectAreas('resizeArea', current_area.id, newWidth, newHeight);
@@ -540,7 +545,7 @@ function isTagInAuthorizedList()
 
 	function isAreaTooSmall(area)
 	{
-		if ((area.width<80) || (area.height<80))
+		if ((area.width<min_bbox_dim) || (area.height<min_bbox_dim))
 		{
 			return true;
 		}
