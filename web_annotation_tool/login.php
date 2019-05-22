@@ -1,6 +1,7 @@
 <?php
 	include 'inc/users.php';
 	if (isset($_SESSION['logged_in'])){
+		echo "Logged out";
 		session_destroy();
 	}
 	if (isset($_POST['user']) && isset($_POST['password'])) {
