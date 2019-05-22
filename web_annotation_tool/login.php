@@ -7,7 +7,7 @@
 	}
 	if (isset($_POST['user']) && isset($_POST['password'])) {
 		//Extremely insecure... but is a stop gap measure
-		if($USER[$_POST['user']] == $_POST['password']) {
+		if($USER[$_POST['user']] == $_POST['password'] && isset($USER[$_POST['user']]))  {
 			$_SESSION['user'] = $USER;
 			$_SESSION['logged_in'] = true;
 			header("Location: index.php");
