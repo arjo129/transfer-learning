@@ -11,7 +11,7 @@
 			header("Location: index.php");
 		}
 		else {
-			echo "Wrong password".$USER;
+			echo "Wrong password".$USER[$_POST['user']]." ";
 		}
 	}
 ?>
