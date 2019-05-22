@@ -1,5 +1,6 @@
 <?php
 	include 'inc/users.php';
+	session_start () ;
 	if (isset($_SESSION['logged_in'])){
 		echo "Logged out";
 		session_destroy();
