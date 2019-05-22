@@ -10,6 +10,9 @@
 			$_SESSION['logged_in'] = true;
 			header("Location: index.php");
 		}
+		else {
+			echo "Wrong password".$USER;
+		}
 	}
 ?>
 
