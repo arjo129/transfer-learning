@@ -27,7 +27,7 @@ function getImages($dir) {
 	$fp = fopen('file_list.txt', 'r');
 	$lst = [];
 	while(! feof($fp))  {
-		array_push($lst, $dir.DIRECTORY_SEPARATOR.fgets($fp));
+		array_push($lst, $dir.DIRECTORY_SEPARATOR.str_replace(array("\n", "\r"), '',fgets($fp)));
 	}
 	return $lst;
 }
