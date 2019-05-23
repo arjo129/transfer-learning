@@ -26,31 +26,41 @@ function getXmlFile($dir, $filename)
 function getImages($dir) {
 	$fp = fopen('file_list.txt', 'r');
 	$lst = [];
+	
 	while(! feof($fp))  {
-		array_push($lst, $dir.DIRECTORY_SEPARATOR.str_replace(array("\n", "\r"), '',fgets($fp)));
+		$fname = str_replace(array("\n", "\r"), '', fgets($fp));
+		if(strpos(strtoupper($fname), '.JPG') !== false){
+			array_push($lst, $dir.DIRECTORY_SEPARATOR.$fname);
+		}
 	}
 	return $lst;
 }
 
-#$it = new RecursiveDirectoryIterator($IMAGE_ROOT_DIR);
-
-# List of images to process
-$list_of_images = array();
-$list_of_annotated_images = array();
-$list_of_not_annotated_images = array();
-
-# Index of images
-$image_index = 0;
-$annotated_image_index = 0;
-$not_annotated_image_index = 0;
+function getMetadata($image){
+	$delimiter = "/";
+	$item = explode($delimiter, $file);
+	$nbItems = count($item);
+		# Should be A/C type / MSN / Image name
+	if ($nbItems>=3)
+	{
+		$image_name = $item[$nbItems-1];
+		$msn = $item[$nbItems-2];
+		$type = $item[$nbItems-3];
+		$image_info = array("type" => $type, "msn" => $msn, 
+			   "name" => $image_name);
+		return $image_info;
+	}
+	return null;
+}
 
 #$log = 'file.log';
 #file_put_contents($log, "INFO - Start the loop\n");
-$images = getImages($IMAGE_ROOT_DIR);
+
+/*
 foreach($images as $file) 
 {	
 	#echo $file;
-	#file_put_contents($log, $file);
+	file_put_contents($log, $file);
 	# Process file
 	if ( (strpos(strtoupper($file), '.JPG') !== false) && (strstr($file, $COLLECTION_NAME)) )
 	{
@@ -90,7 +100,7 @@ foreach($images as $file)
 		}									
 	}		
 }
-
+*/
 $file = 'file.log';
 file_put_contents($file, "INFO - getNewImage.php\n");
 
@@ -109,11 +119,24 @@ foreach( $list_of_images as $image_info )
 
 echo "Number of images :" . count($list_of_images) ."<br>";*/
 
+
+
 # New image 80%
 $random_new = rand(0, 99);
-
 file_put_contents($file, "Random index = ".$random_new."\n",FILE_APPEND | LOCK_EX);
 
+$not_found = true; //TODO: This will be slow as more things get annotated
+$images = getImages($IMAGE_ROOT_DIR);
+$image_info = null;
+while($not_found){
+	$choice = random_int(0, count($images)-1);
+	$image_info = getMetadata($images[$choice]);
+	$xml_filename = str_repslace(array(".jpg",".JPG"), ".xml", $image_info["name"]);
+	$xml_filepath = getXmlFile($ANNOTATIONS_DIR, $xml_filename);
+	if($xml_filepath != null)
+		$not_found = false;
+}
+/*
 # Not annotated 80%
 if ( ($random_new < $ratio_new_old) && (count($list_of_not_annotated_images)>0))
 {
@@ -141,6 +164,7 @@ else
 		$image_info = $list_of_not_annotated_images[$random_index];
 	}
 }
+*/
 
 #	$random_index = rand(0, count($list_of_images)-1);
 #	$image_info = $list_of_images[$random_index];
