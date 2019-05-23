@@ -135,7 +135,7 @@ class xmlVocAnnotations
 		$this->prettify();
 		              
 		// Replace .jpg by .xml
-		$filename = str_replace(array(".jpg",".JPG"),".xml", $this->_filename);		
+		$filename = str_replace(array(".jpg",".JPG"),".xml", strtolower($this->_filename));		
 		$fullPath = $targetDir. DIRECTORY_SEPARATOR . $filename;
 				
 		file_put_contents($file, "Save annotations to ". $fullPath ."\n",FILE_APPEND | LOCK_EX);					

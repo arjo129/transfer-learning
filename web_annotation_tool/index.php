@@ -625,6 +625,7 @@ function isTagInAuthorizedList()
   function validateTagsAndRegions()
   {
 
+		console.log("Validating tags");
      // Process the list of tags
 	 var areas = $('#image_to_process').selectAreas('areas');
 
