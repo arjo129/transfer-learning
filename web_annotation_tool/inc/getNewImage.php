@@ -3,7 +3,7 @@
 include 'xmlVocReadAnnotationsFile.php';
 include 'configuration.php';
 
-$service_requested = $_GET["info"];
+# $service_requested = $_GET["info"];
 
 # Search the xml file in a $dir
 function getXmlFile($dir, $filename)
