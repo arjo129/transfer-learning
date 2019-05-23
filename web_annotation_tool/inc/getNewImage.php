@@ -38,7 +38,7 @@ function getImages($dir) {
 
 function getMetadata($image){
 	$delimiter = "/";
-	$item = explode($delimiter, $file);
+	$item = explode($delimiter, $image);
 	$nbItems = count($item);
 		# Should be A/C type / MSN / Image name
 	if ($nbItems>=3)
@@ -50,7 +50,7 @@ function getMetadata($image){
 			   "name" => $image_name);
 		return $image_info;
 	}
-	return null;
+	throw "Malformatted string ".$image;
 }
 
 #$log = 'file.log';
@@ -128,12 +128,12 @@ file_put_contents($file, "Random index = ".$random_new."\n",FILE_APPEND | LOCK_E
 $not_found = true; //TODO: This will be slow as more things get annotated
 $images = getImages($IMAGE_ROOT_DIR);
 $image_info = null;
-while($not_found){
+while ($not_found) {
 	$choice = random_int(0, count($images)-1);
 	$image_info = getMetadata($images[$choice]);
-	$xml_filename = str_repslace(array(".jpg",".JPG"), ".xml", $image_info["name"]);
+	$xml_filename = str_replace(array(".jpg",".JPG"), ".xml", $image_info["name"]);
 	$xml_filepath = getXmlFile($ANNOTATIONS_DIR, $xml_filename);
-	if($xml_filepath != null)
+	if($xml_filepath === null)
 		$not_found = false;
 }
 /*
