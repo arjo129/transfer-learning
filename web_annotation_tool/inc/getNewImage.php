@@ -63,8 +63,13 @@ function getProgress() {
 
 		fclose($fp);
 
-		# return progress percentage to 3dp
-		return round(($num_annotations*100)/$num_images, 3);
+		if ($num_images == 0) {
+			return 0;
+		}
+		else {
+			# return progress percentage to 3dp
+			return round(($num_annotations*100)/$num_images, 3);
+		}
 	}
 	else {
 		return 0;

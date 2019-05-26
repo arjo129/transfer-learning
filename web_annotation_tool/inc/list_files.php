@@ -20,11 +20,11 @@ function create_index($dir, $index_name) {
 }
 
 # keep track of number of images and annotations. useful for progress bar.
-function create_progress($num_images, $num_annotations, $progress_name) {
+function create_progress($num_annotations, $num_images, $progress_name) {
     $fp = fopen($progress_name, 'w');
     
-    echo "". $num_images . " " . $num_annotations . "\n";
-    fwrite($fp, $num_images . " " . $num_annotations . "\n");
+    echo "". $num_annotations . " " . $num_images . "\n";
+    fwrite($fp, $num_annotations . " " . $num_images . "\n");
     
     fclose($fp);
 }
