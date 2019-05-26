@@ -6,8 +6,7 @@ include 'configuration.php';
 # $service_requested = $_GET["info"];
 
 # Search the xml file in a $dir
-function getXmlFile($dir, $filename)
-{
+function getXmlFile($dir, $filename) {
 	$xml_filepath = null;
     #$files = scandir($dir);
     $results = null;	
@@ -36,7 +35,7 @@ function getImages($dir) {
 	return $lst;
 }
 
-function getMetadata($image){
+function getMetadata($image) {
 	$delimiter = "/";
 	$item = explode($delimiter, $image);
 	$nbItems = count($item);
@@ -51,6 +50,25 @@ function getMetadata($image){
 		return $image_info;
 	}
 	throw "Malformatted string ".$image;
+}
+
+# get current annotation progress in percentage
+function getProgress() {
+	if (file_exists('progress.txt')) {
+		$fp = fopen('progress.txt', 'r');
+		$row = fgets($fp);
+		$delimiter = " ";
+
+		list($num_annotations, $num_images) = explode($delimiter, $row, 2);
+
+		fclose($fp);
+
+		# return progress percentage to 3dp
+		return round(($num_annotations*100)/$num_images, 3);
+	}
+	else {
+		return 0;
+	}
 }
 
 #$log = 'file.log';
@@ -136,6 +154,8 @@ while ($not_found) {
 	if($xml_filepath === null)
 		$not_found = false;
 }
+
+$current_progress = getProgress();
 /*
 # Not annotated 80%
 if ( ($random_new < $ratio_new_old) && (count($list_of_not_annotated_images)>0))
@@ -216,7 +236,7 @@ file_put_contents($file, "URL image = ".$url."\n",FILE_APPEND | LOCK_EX);
 
 # Prepare message to send
 $data = array ("url" => $url, "id" => $id, "folder" => $image_info["type"] . "/" . $image_info["msn"], 
-				"annotations" => $annotations);
+				"annotations" => $annotations, "current_progress" => $current_progress);
 	
 file_put_contents($file, "Annotations ".serialize($data)."\n",FILE_APPEND | LOCK_EX);
 	

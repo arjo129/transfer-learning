@@ -1,0 +1,16 @@
+#progressBarContainer {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#progressBar {
+  width: 1%;
+  height: 30px;
+  background-color: #4CAF50;
+}
+
+.progressBarText {
+  font-family: 'Raleway', sans-serif;
+  font-size: 100%;
+  text-align:center
+}

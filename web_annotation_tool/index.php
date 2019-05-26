@@ -20,8 +20,9 @@
 	<link rel="stylesheet" href="autocomplete/easy-autocomplete.css" type="text/css" />
 	<link rel="stylesheet" href="autocomplete/easy-autocomplete.themes.css" type="text/css" />
 	<link rel="stylesheet" href="google_fonts/google_fonts_quicksand.css" type="text/css" />
-  <link rel="stylesheet" href="google_fonts/google_fonts_raleway.css" type="text/css" />
+  	<link rel="stylesheet" href="google_fonts/google_fonts_raleway.css" type="text/css" />
 	<link href="css/jquery.selectareas.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/progress_bar.css">
 
 	<script src="js/jquery-3.2.1.js" type="text/javascript"></script>	
 	<script src="js/jquery.selectareas.js" type="text/javascript"></script>
@@ -815,15 +816,14 @@ function isTagInAuthorizedList()
 						image_info.folder = dataJson.folder;
 						image_id   = dataJson.id;
 						json_annotations = dataJson.annotations;
+						current_progress = dataJson.current_progress;
+
 						$('#image_id').text(image_id);
 						$('#image_to_process').attr("src", image_info.url);
 
-						/*$('#image_to_process').selectAreas(
-						{
-							allowNudge: false,
-							// onChanged:onAreaChanged,
-							onDeleted:onAreaDeleted,
-						});*/
+						$('#progressBar').width(current_progress + '%');
+						$('#progressBar').text(current_progress + '%');
+						// alert(current_progress);
 
 
 					 },
@@ -912,6 +912,9 @@ function isTagInAuthorizedList()
 								</div>
 							</div>
 
+							<div id="progressBarContainer">
+							  <div id="progressBar" class="progressBarText"></div>
+							</div>
 
 							<div style="padding-top:24px;box-sizing: border-box;width=100%;text-align: right;">
 								<button onclick="window.location.href='thank_you.html'" class="tooltip ae_button_level_2">Leave
