@@ -418,6 +418,36 @@ $(document).ready(function ()
 	init_finished = true;
 })
 
+// Keyboard shortcuts. v/V to validate, i/I to ignore.
+function bindKeyShortcuts() 
+{
+	$(document).keydown(function(event) 
+	{
+
+		switch(event.keyCode) 
+		{
+			case 86: // 'V'
+				$("#validate_button").trigger("click");
+			break;
+
+			case 118: // 'v'
+				$("#validate_button").trigger("click");
+			break;
+
+			case 73: // I
+				$("#ignore_button").trigger("click");
+			break;
+
+			case 105: // i
+				$("#ignore_button").trigger("click");
+			break;
+
+		}
+	})
+}	
+
+bindKeyShortcuts();
+
 function setValidInputTag(_tag)
 {
 	$("#tag_input").val(_tag);
@@ -875,7 +905,7 @@ function isTagInAuthorizedList()
 								<img src="./images/ic_navigate_next_black_48dp.png" style="vertical-align: bottom;" alt="" width="18" height="18"></span></button>
 								</div>
 								<div style="display: inline-block;">
-								<button onclick="window.location.reload()" class="tooltip ae_button_level_2">Ignore & Get next image
+								<button id="ignore_button" onclick="window.location.reload()" class="tooltip ae_button_level_2">Ignore & Get next image
 								<span class="tooltiptext light_blue">Ignore this image and associated tags and go to the next image.</span>
 								<span style="padding-left:4px;">
 								<img src="./images/ic_replay_black_48dp.png" style="vertical-align: bottom;" alt="" width="18" height="18"></span></button>
