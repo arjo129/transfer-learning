@@ -3,4 +3,6 @@ bat_wolf/
 .ipynb_checkpoints/
 web_annotation_tool/inc/users.php
 web_annotation_tool/inc/file_list.txt
+web_annotation_tool/inc/annotation_list.txt
+web_annotation_tool/inc/progress.txt
 web_annotation_tool/inc/file.log

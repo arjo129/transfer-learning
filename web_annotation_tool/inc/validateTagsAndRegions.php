@@ -47,6 +47,12 @@ file_put_contents($file, "End of file validationTagsAndRegions" ,FILE_APPEND | L
 file_put_contents($file, " " ,FILE_APPEND | LOCK_EX);
 file_put_contents($file, " " ,FILE_APPEND | LOCK_EX);
 
+if (file_exists('progress.txt')) {
+    $delimiter = ' ';
+    list($num_annotations, $num_images) = explode($delimiter, file_get_contents('progress.txt'), 2);
+    file_put_contents('progress.txt', $num_annotations+1 . " " . $num_images . "\n");
+}
+
 header('Content-type: application/json');
 echo json_encode($response_array);
 

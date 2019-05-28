@@ -1233,6 +1233,7 @@ var EasyAutocomplete = (function(scope) {
 				bindKeypress();
 				bindFocus();
 				bindBlur();
+				bindKeyNum();
 			}
 
 			function bindFocusOut() {
@@ -1261,6 +1262,24 @@ var EasyAutocomplete = (function(scope) {
 					
 					selectedElement = 0;
 				});
+			}
+
+			// Allow keyboard shortcuts 1 to 9 to represent clicking of labels
+			function bindKeyNum() {
+				$(document).keydown(function(event) {
+					if (event.keyCode >= 49 && event.keyCode <= 57) {
+						selectedElement = event.keyCode -= 49;
+						if (selectedElement < elementsList.length) {
+
+							$field.val(config.get("getValue")(elementsList[selectedElement]));
+							
+							selectElement(selectedElement);
+
+							$field.trigger('change');
+						}
+					}
+				})
+
 			}
 
 			function bindKeyup() {
